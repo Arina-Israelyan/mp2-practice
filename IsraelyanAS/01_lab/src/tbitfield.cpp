@@ -129,10 +129,10 @@ TBitField TBitField::operator|(const TBitField& bf) // операция "или"
     for (i = 0; i < len; ++i) {
         res.pMem[i] = pMem[i] | bf.pMem[i];
     }
-    for (; i < bf.MemLen; ++i) {
+    for (; i < MemLen; ++i) {
         res.pMem[i] = pMem[i];
     }
-    for (; i < MemLen; ++i) {
+    for (; i < bf.MemLen; ++i) {
         res.pMem[i] = bf.pMem[i];
     }
     return res;
@@ -155,7 +155,7 @@ TBitField TBitField::operator~(void) // отрицание
     for (int i = 0; i < MemLen; ++i) {
         res.pMem[i] = ~pMem[i];
     }
-    int t = BitLen % (8 * sizeof(TELEM));
+    int t = BitLen % Telembit;
     if (t != 0 && res.MemLen > 0) {
         TELEM mask = ((TELEM)1 << t) - 1;
         res.pMem[res.MemLen - 1] &= mask;
